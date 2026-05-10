@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://sqq5i3p0pjb1"]
+
+[ext_resource type="Script" path="res://snake.gd" id="1_gxkgb"]
+[ext_resource type="PackedScene" uid="uid://7n1222vl1d27" path="res://serpiente.tscn" id="2_gxkgb"]
+[ext_resource type="Texture2D" uid="uid://b2rqbjjhy6s5l" path="res://imagenes/fondo.jpg" id="2_or32h"]
+[ext_resource type="AudioStream" uid="uid://c1s7bv2tflswh" path="res://sonidos/explosionCrunch_000.ogg" id="3_ehss6"]
+[ext_resource type="AudioStream" uid="uid://csovtxp8yb1ca" path="res://sonidos/impactGlass_medium_002.ogg" id="4_ga88p"]
+
+[node name="Snake" type="Node2D"]
+script = ExtResource("1_gxkgb")
+
+[node name="fondo" type="Sprite2D" parent="."]
+position = Vector2(-19, -1)
+scale = Vector2(-0.237932, -0.270855)
+texture = ExtResource("2_or32h")
+
+[node name="Serpiente" parent="." instance=ExtResource("2_gxkgb")]
+
+[node name="sonidoFruta" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ehss6")
+
+[node name="sonidoPared" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ga88p")
+
+[node name="textoComenzar" type="Label" parent="."]
+offset_left = 480.0
+offset_top = 320.0
+offset_right = 1080.0
+offset_bottom = 360.0
+theme_override_colors/font_color = Color(0.991846, 0.594579, 0.622203, 1)
+theme_override_colors/font_shadow_color = Color(0.946824, 0.690395, 0.790562, 1)
+theme_override_colors/font_outline_color = Color(0.835279, 0.369498, 0.469685, 1)
+theme_override_font_sizes/font_size = 20
+text = "PULSA ESPACIO PARA EMPEZAR"
+
+[node name="textoPuntos" type="Label" parent="."]
+custom_minimum_size = Vector2(40, 20)
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 420.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0.752941, 0.513726, 0.513726, 1)
+theme_override_colors/font_shadow_color = Color(0.603923, 0.603923, 0.603923, 1)
+theme_override_colors/font_outline_color = Color(0.560955, 0.560955, 0.560955, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 32
+text = "\"0\""
+
+[connection signal="area_entered" from="Serpiente" to="." method="_on_serpiente_area_entered"]
